@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18KChat - Agent Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="login-page">
+    <div class="login-container animate__animated animate__fadeIn">
+        <div class="login-box">
+            <!-- Login Form -->
+            <div id="loginStep" class="login-step active">
+                <div class="login-header">
+                    <img src="assets/logo.png" alt="18KChat Logo" class="login-logo animate__animated animate__bounceIn">
+                    <h1>Agent Login</h1>
+                    <p class="login-subtitle">Welcome back! Please login to your account</p>
+                </div>
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="input-group">
+                            <i class="input-icon fas fa-user"></i>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-group">
+                            <i class="input-icon fas fa-lock"></i>
+                            <input type="password" id="password" name="password" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword()">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" name="remember"> Remember me
+                        </label>
+                        <a href="#" class="forgot-password" onclick="showForgotPassword()">Forgot Password?</a>
+                    </div>
+                    <div id="errorMessage" class="error-message"></div>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-text">Login</span>
+                        <span class="btn-loader"></span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- 2FA Step -->
+            <div id="twoFactorStep" class="login-step">
+                <div class="login-header">
+                    <h2>Two-Factor Authentication</h2>
+                    <p class="login-subtitle">Enter the 6-digit code from your authenticator app</p>
+                </div>
+                <div class="otp-input-group">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required>
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required>
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required>
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required>
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required>
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required>
+                </div>
+                <div class="form-timer">Code expires in: <span id="codeTimer">30</span>s</div>
+                <button class="btn btn-primary" onclick="verifyCode()">Verify</button>
+                <button class="btn btn-secondary" onclick="showBackupCode()">Use Backup Code</button>
+            </div>
+
+            <!-- Forgot Password Step -->
+            <div id="forgotStep" class="login-step">
+                <div class="login-header">
+                    <h2>Reset Password</h2>
+                    <p class="login-subtitle">Enter your email to receive reset instructions</p>
+                </div>
+                <form id="forgotForm" class="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="input-group">
+                            <i class="input-icon fas fa-envelope"></i>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Reset Link</button>
+                    <button type="button" class="btn btn-secondary" onclick="showLogin()">Back to Login</button>
+                </form>
+            </div>
+
+            <!-- Backup Code Step -->
+            <div id="backupStep" class="login-step">
+                <div class="login-header">
+                    <h2>Backup Code</h2>
+                    <p class="login-subtitle">Enter one of your backup codes</p>
+                </div>
+                <form id="backupForm" class="login-form">
+                    <div class="form-group">
+                        <label for="backupCode">Backup Code</label>
+                        <div class="input-group">
+                            <i class="input-icon fas fa-key"></i>
+                            <input type="text" id="backupCode" name="backupCode" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Verify</button>
+                    <button type="button" class="btn btn-secondary" onclick="showTwoFactor()">Back to 2FA</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/agent-auth.js"></script>
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleBtn = document.querySelector('.toggle-password i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.classList.remove('fa-eye');
+                toggleBtn.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.classList.remove('fa-eye-slash');
+                toggleBtn.classList.add('fa-eye');
+            }
+        }
+
+        function showStep(stepId) {
+            document.querySelectorAll('.login-step').forEach(step => {
+                step.classList.remove('active');
+            });
+            document.getElementById(stepId).classList.add('active');
+        }
+
+        function showLogin() { showStep('loginStep'); }
+        function showTwoFactor() { showStep('twoFactorStep'); }
+        function showForgotPassword() { showStep('forgotStep'); }
+        function showBackupCode() { showStep('backupStep'); }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            showLogin();
+        });
+    </script>
+</body>
+</html>

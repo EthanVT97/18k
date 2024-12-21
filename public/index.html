@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7Dragon Chat</title>
+    
+    <!-- CSS Libraries -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/chat-widget.css" rel="stylesheet">
+    
+    <!-- Configuration -->
+    <script src="js/config.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="js/app.js" defer></script>
+    <script src="js/chat-widget.js" defer></script>
+</head>
+
+<body class="dark-theme">
+    <div class="site-wrapper">
+        <!-- Header Section -->
+        <header class="site-header">
+            <div class="header-top">
+                <div class="container">
+                    <div class="language-selector">
+                        <select id="languageSelector">
+                            <option value="en">🇺🇸 English</option>
+                            <option value="my">🇲🇲 Myanmar</option>
+                            <option value="th">🇹🇭 Thai</option>
+                        </select>
+                    </div>
+                    <div class="top-nav">
+                        <a href="#" class="top-nav-link"><i class="fas fa-gift"></i> Promotions</a>
+                        <a href="#" class="top-nav-link"><i class="fas fa-crown"></i> VIP Club</a>
+                        <a href="#" class="top-nav-link"><i class="fas fa-headset"></i> Support</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="header-main">
+                <div class="container">
+                    <div class="logo">
+                        <h1><i class="fas fa-dragon"></i> 7<span class="gold-text">Dragon</span></h1>
+                        <span class="vip-badge">VIP Casino</span>
+                    </div>
+                    <nav class="main-nav">
+                        <a href="https://m9shankoemee.com/" class="nav-link play-btn" target="_blank">
+                            <i class="fas fa-gamepad"></i> Game ကစားရန်
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 class="hero-title">Welcome to <span class="gold-text">7Dragon Casino</span></h2>
+                    <p class="hero-subtitle">Your Premier Online Gaming Destination</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary">Play Now</a>
+                        <a href="#" class="btn btn-secondary">VIP Benefits</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Games Section -->
+        <section class="featured-games">
+            <div class="container">
+                <h2 class="section-title">Popular Games <span class="gold-text">🎲</span></h2>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="https://via.placeholder.com/300x200" alt="Baccarat">
+                            <div class="game-overlay">
+                                <button class="play-btn">Play Now</button>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>VIP Baccarat</h3>
+                            <div class="game-stats">
+                                <span><i class="fas fa-users"></i> Live Dealers</span>
+                                <span><i class="fas fa-gem"></i> High Stakes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="https://via.placeholder.com/300x200" alt="Roulette">
+                            <div class="game-overlay">
+                                <button class="play-btn">Play Now</button>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Dragon Roulette</h3>
+                            <div class="game-stats">
+                                <span><i class="fas fa-users"></i> Live Dealers</span>
+                                <span><i class="fas fa-gem"></i> VIP Tables</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="https://via.placeholder.com/300x200" alt="Game 3">
+                            <div class="game-overlay">
+                                <button class="play-btn">Play Now</button>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Starlight Princess</h3>
+                            <div class="game-stats">
+                                <span><i class="fas fa-percentage"></i> 96.5% RTP</span>
+                                <span><i class="fas fa-bolt"></i> High Volatility</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Promotions Section -->
+        <section class="promotions">
+            <div class="container">
+                <h2 class="section-title">Special Offers <span class="gold-text">🎁</span></h2>
+                <div class="promotions-grid">
+                    <div class="promo-card">
+                        <div class="promo-badge">NEW</div>
+                        <h3>Welcome Bonus</h3>
+                        <p class="promo-amount">300% UP TO $3000</p>
+                        <p class="promo-desc">First deposit bonus for new players</p>
+                        <button class="promo-btn">Claim Now</button>
+                    </div>
+                    <div class="promo-card">
+                        <div class="promo-badge hot">HOT</div>
+                        <h3>Daily Cashback</h3>
+                        <p class="promo-amount">15% CASHBACK</p>
+                        <p class="promo-desc">Daily returns on your losses</p>
+                        <button class="promo-btn">Join Now</button>
+                    </div>
+                    <div class="promo-card">
+                        <div class="promo-badge vip">VIP</div>
+                        <h3>High Roller Bonus</h3>
+                        <p class="promo-amount">500% UP TO $10000</p>
+                        <p class="promo-desc">Exclusive VIP member bonus</p>
+                        <button class="promo-btn">Get VIP</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Responsible Gaming Section -->
+        <section class="responsible-gaming">
+            <div class="container">
+                <div class="gaming-notice">
+                    <div class="notice-content">
+                        <h3>🎲 Responsible Gaming</h3>
+                        <div class="notice-grid">
+                            <div class="notice-item">
+                                <i class="fas fa-user-clock"></i>
+                                <p>18+ Only</p>
+                            </div>
+                            <div class="notice-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <p>Licensed & Regulated</p>
+                            </div>
+                            <div class="notice-item">
+                                <i class="fas fa-hand-holding-heart"></i>
+                                <p>Play Responsibly</p>
+                            </div>
+                            <div class="notice-item">
+                                <i class="fas fa-headset"></i>
+                                <p>24/7 Support</p>
+                            </div>
+                        </div>
+                        <div class="warning-text">
+                            <p>Gambling can be addictive. Please play responsibly. If you feel you may have a gambling problem, contact our support team for help.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose Us <span class="gold-text">👑</span></h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Secure Gaming</h3>
+                        <p>Licensed and regulated platform with advanced security measures</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>24/7 Support</h3>
+                        <p>Professional support team available round the clock</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-wallet"></i>
+                        <h3>Fast Payouts</h3>
+                        <p>Quick and hassle-free withdrawal process</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-gift"></i>
+                        <h3>Regular Bonuses</h3>
+                        <p>Exciting promotions and rewards for our players</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h3>About Us</h3>
+                        <p>7Dragon Casino offers the best online gaming experience with a wide selection of games and exclusive VIP benefits.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#">Games</a></li>
+                            <li><a href="#">Promotions</a></li>
+                            <li><a href="#">VIP Club</a></li>
+                            <li><a href="#">Support</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Support</h3>
+                        <ul>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Responsible Gaming</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Contact Us</h3>
+                        <ul>
+                            <li><i class="fas fa-envelope"></i> support@7dragoncasino.com</li>
+                            <li><i class="fas fa-phone"></i> +1 234 567 8900</li>
+                            <li><i class="fas fa-comments"></i> Live Chat</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="copyright-info">
+                        <p>Copyright &copy; 2024 18KChat. All rights reserved.</p>
+                        <p>Licensed by 7Dragon Casino.</p>
+                    </div>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                        <i class="fas fa-coins"></i>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Chat Widget -->
+    <div id="chatWidget" class="chat-widget">
+        <button id="chatWidgetButton" class="chat-widget-button animate__animated animate__fadeIn">
+            <i class="fas fa-headset"></i>
+            <span class="notification-badge hidden">0</span>
+        </button>
+
+        <div id="chatWindow" class="chat-window hidden animate__animated">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <div class="chat-logo">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <div class="chat-status">
+                        <h3>7Dragon Support</h3>
+                        <span class="status-indicator">
+                            <i class="fas fa-circle"></i> Online
+                        </span>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="minimize-btn">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="close-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-messages">
+                <div class="welcome-message">
+                    <h4>Welcome to 7Dragon Support! 🐉</h4>
+                    <p>How can we assist you with your gaming experience today?</p>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <button class="quick-action-btn" data-query="games">
+                    <i class="fas fa-dice"></i> Games
+                </button>
+                <button class="quick-action-btn" data-query="deposit">
+                    <i class="fas fa-wallet"></i> Deposit
+                </button>
+                <button class="quick-action-btn" data-query="withdraw">
+                    <i class="fas fa-money-bill-wave"></i> Withdraw
+                </button>
+                <button class="quick-action-btn" data-query="vip">
+                    <i class="fas fa-crown"></i> VIP
+                </button>
+            </div>
+
+            <div class="file-preview hidden">
+                <div class="file-preview-content">
+                    <img class="preview-image hidden" src="" alt="File preview">
+                    <div class="file-info">
+                        <span class="file-name"></span>
+                        <span class="file-size"></span>
+                    </div>
+                    <button class="remove-file">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-input">
+                <div class="input-actions">
+                    <input type="file" id="fileInput" hidden>
+                    <button onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <button>
+                        <i class="fas fa-face-smile"></i>
+                    </button>
+                </div>
+                <div class="input-container">
+                    <textarea id="messageInput" placeholder="Type your message..." rows="1"></textarea>
+                    <button class="send-btn" disabled>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

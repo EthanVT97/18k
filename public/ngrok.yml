@@ -1,0 +1,6 @@
+version: "2"
+authtoken: "" # Add your ngrok authtoken here
+tunnels:
+  web:
+    addr: 8080
+    proto: http

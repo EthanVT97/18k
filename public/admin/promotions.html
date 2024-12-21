@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7Dragon Admin - Promotions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin-style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar (Same as dashboard.html) -->
+        <aside class="sidebar">
+            <!-- ... Sidebar content ... -->
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search promotions...">
+                </div>
+                
+                <div class="top-bar-right">
+                    <button class="add-promotion-btn">
+                        <i class="fas fa-plus"></i> Create Promotion
+                    </button>
+                </div>
+            </header>
+
+            <!-- Promotions Content -->
+            <div class="promotions-content">
+                <!-- Active Promotions -->
+                <div class="promotions-section">
+                    <h2>Active Promotions</h2>
+                    <div class="promotions-grid">
+                        <div class="promotion-card">
+                            <div class="promotion-header">
+                                <span class="badge active">Active</span>
+                                <div class="promotion-actions">
+                                    <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="promotion-body">
+                                <h3>Welcome Bonus</h3>
+                                <p>100% match up to $500 on first deposit</p>
+                                <div class="promotion-details">
+                                    <div class="detail">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>Ends: Dec 31, 2024</span>
+                                    </div>
+                                    <div class="detail">
+                                        <i class="fas fa-users"></i>
+                                        <span>Used: 234 times</span>
+                                    </div>
+                                </div>
+                                <div class="promotion-stats">
+                                    <div class="stat">
+                                        <label>Claimed</label>
+                                        <span>$12,345</span>
+                                    </div>
+                                    <div class="stat">
+                                        <label>Conversion</label>
+                                        <span>65%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- More promotion cards... -->
+                    </div>
+                </div>
+
+                <!-- Scheduled Promotions -->
+                <div class="promotions-section">
+                    <h2>Scheduled Promotions</h2>
+                    <div class="promotions-grid">
+                        <!-- Scheduled promotion cards... -->
+                    </div>
+                </div>
+
+                <!-- Expired Promotions -->
+                <div class="promotions-section">
+                    <h2>Expired Promotions</h2>
+                    <div class="promotions-grid">
+                        <!-- Expired promotion cards... -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Promotion Modal -->
+    <div class="modal promotion-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create Promotion</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="promotionForm">
+                    <div class="form-group">
+                        <label>Promotion Name</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="description" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Promotion Type</label>
+                        <select name="type" required>
+                            <option value="deposit">Deposit Bonus</option>
+                            <option value="cashback">Cashback</option>
+                            <option value="freespins">Free Spins</option>
+                            <option value="loyalty">Loyalty Points</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input type="datetime-local" name="startDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input type="datetime-local" name="endDate" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Bonus Amount (%)</label>
+                            <input type="number" name="bonusAmount" min="1" max="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Maximum Bonus</label>
+                            <input type="number" name="maxBonus" min="0" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Minimum Deposit</label>
+                        <input type="number" name="minDeposit" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Wagering Requirements</label>
+                        <input type="number" name="wageringReq" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Eligible Games</label>
+                        <select name="eligibleGames" multiple required>
+                            <option value="all">All Games</option>
+                            <option value="slots">Slots Only</option>
+                            <option value="table">Table Games</option>
+                            <option value="live">Live Casino</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>User Groups</label>
+                        <select name="userGroups" multiple required>
+                            <option value="all">All Users</option>
+                            <option value="new">New Users</option>
+                            <option value="vip">VIP Users</option>
+                            <option value="inactive">Inactive Users</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Promotion Code</label>
+                        <input type="text" name="promoCode">
+                        <button type="button" class="generate-code">Generate Code</button>
+                    </div>
+                    <div class="form-group">
+                        <label>Terms & Conditions</label>
+                        <textarea name="terms" rows="5" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="save-promotion">Save Promotion</button>
+                        <button type="button" class="cancel-promotion">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/promotions.js"></script>
+</body>
+</html>

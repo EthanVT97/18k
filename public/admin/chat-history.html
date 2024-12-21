@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7Dragon Admin - Chat History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin-style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar (Same as dashboard.html) -->
+        <aside class="sidebar">
+            <!-- ... Sidebar content ... -->
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search chat history...">
+                </div>
+                
+                <div class="top-bar-right">
+                    <button class="export-chats">
+                        <i class="fas fa-download"></i> Export History
+                    </button>
+                </div>
+            </header>
+
+            <!-- Chat History Content -->
+            <div class="chat-history-content">
+                <!-- Chat Filters -->
+                <div class="filter-section">
+                    <div class="filter-group">
+                        <label>Date Range:</label>
+                        <input type="date" id="startDate">
+                        <span>to</span>
+                        <input type="date" id="endDate">
+                    </div>
+                    <div class="filter-group">
+                        <label>Status:</label>
+                        <select id="chatStatus">
+                            <option value="all">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="closed">Closed</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Agent:</label>
+                        <select id="agentFilter">
+                            <option value="all">All Agents</option>
+                            <option value="agent1">Agent 1</option>
+                            <option value="agent2">Agent 2</option>
+                        </select>
+                    </div>
+                    <button class="apply-filters">Apply Filters</button>
+                </div>
+
+                <!-- Chat List -->
+                <div class="chat-list">
+                    <div class="chat-item">
+                        <div class="chat-header">
+                            <div class="user-info">
+                                <img src="https://via.placeholder.com/40" alt="User">
+                                <div class="user-details">
+                                    <h4>John Doe</h4>
+                                    <span class="chat-id">#CH12345</span>
+                                </div>
+                            </div>
+                            <div class="chat-status">
+                                <span class="status-badge closed">Closed</span>
+                                <span class="chat-time">2024-12-21 15:30</span>
+                            </div>
+                        </div>
+                        <div class="chat-preview">
+                            <p>Last message: Thank you for your help with my account issue...</p>
+                        </div>
+                        <div class="chat-actions">
+                            <button class="view-chat">View Full Chat</button>
+                            <button class="download-chat"><i class="fas fa-download"></i></button>
+                            <button class="delete-chat"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- More chat items... -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="prev-page"><i class="fas fa-chevron-left"></i></button>
+                    <div class="page-numbers">
+                        <span class="current">1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>...</span>
+                        <span>10</span>
+                    </div>
+                    <button class="next-page"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Chat Details Modal -->
+    <div class="modal chat-details-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Chat Details</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="chat-info">
+                    <div class="info-group">
+                        <label>Chat ID:</label>
+                        <span>#CH12345</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Started:</label>
+                        <span>2024-12-21 15:00</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Duration:</label>
+                        <span>30 minutes</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Agent:</label>
+                        <span>Agent 1</span>
+                    </div>
+                </div>
+                <div class="chat-messages">
+                    <div class="message user">
+                        <img src="https://via.placeholder.com/40" alt="User">
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="sender">John Doe</span>
+                                <span class="time">15:00</span>
+                            </div>
+                            <p>Hello, I need help with my account.</p>
+                        </div>
+                    </div>
+                    <div class="message agent">
+                        <img src="https://via.placeholder.com/40" alt="Agent">
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="sender">Agent 1</span>
+                                <span class="time">15:01</span>
+                            </div>
+                            <p>Hi John, I'd be happy to help. Could you please provide your account number?</p>
+                        </div>
+                    </div>
+                    <!-- More messages... -->
+                </div>
+                <div class="chat-analytics">
+                    <h3>Chat Analytics</h3>
+                    <div class="analytics-grid">
+                        <div class="analytic-item">
+                            <label>Response Time</label>
+                            <span>1 minute</span>
+                        </div>
+                        <div class="analytic-item">
+                            <label>Resolution Time</label>
+                            <span>30 minutes</span>
+                        </div>
+                        <div class="analytic-item">
+                            <label>User Satisfaction</label>
+                            <span>5/5</span>
+                        </div>
+                        <div class="analytic-item">
+                            <label>Messages Count</label>
+                            <span>15</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/chat-history.js"></script>
+</body>
+</html>

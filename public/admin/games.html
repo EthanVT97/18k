@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7Dragon Admin - Games Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin-style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar (Same as dashboard.html) -->
+        <aside class="sidebar">
+            <!-- ... Sidebar content ... -->
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search games...">
+                </div>
+                
+                <div class="top-bar-right">
+                    <button class="add-game-btn">
+                        <i class="fas fa-plus"></i> Add New Game
+                    </button>
+                </div>
+            </header>
+
+            <!-- Games Content -->
+            <div class="games-content">
+                <!-- Game Categories -->
+                <div class="game-categories">
+                    <button class="category active" data-category="all">All Games</button>
+                    <button class="category" data-category="slots">Slots</button>
+                    <button class="category" data-category="table">Table Games</button>
+                    <button class="category" data-category="live">Live Casino</button>
+                    <button class="category" data-category="poker">Poker</button>
+                    <button class="category" data-category="sports">Sports</button>
+                </div>
+
+                <!-- Games Grid -->
+                <div class="games-grid">
+                    <!-- Game Card Template -->
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="https://via.placeholder.com/200x150" alt="Game Name">
+                            <div class="game-overlay">
+                                <button class="edit-game"><i class="fas fa-edit"></i></button>
+                                <button class="toggle-game active"><i class="fas fa-toggle-on"></i></button>
+                                <button class="delete-game"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Game Name</h3>
+                            <div class="game-stats">
+                                <span><i class="fas fa-users"></i> 1.2K</span>
+                                <span><i class="fas fa-trophy"></i> 95%</span>
+                            </div>
+                            <div class="game-tags">
+                                <span class="tag">Popular</span>
+                                <span class="tag">New</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- More game cards... -->
+                </div>
+
+                <!-- Game Analytics -->
+                <div class="game-analytics">
+                    <h2>Game Performance</h2>
+                    <div class="analytics-cards">
+                        <div class="analytic-card">
+                            <h3>Most Played</h3>
+                            <div class="game-list">
+                                <div class="game-item">
+                                    <img src="https://via.placeholder.com/50" alt="Game 1">
+                                    <div class="game-details">
+                                        <span class="game-name">Mega Slots</span>
+                                        <span class="game-plays">15,234 plays</span>
+                                    </div>
+                                </div>
+                                <!-- More game items... -->
+                            </div>
+                        </div>
+                        <div class="analytic-card">
+                            <h3>Highest Revenue</h3>
+                            <div class="game-list">
+                                <div class="game-item">
+                                    <img src="https://via.placeholder.com/50" alt="Game 2">
+                                    <div class="game-details">
+                                        <span class="game-name">Poker Pro</span>
+                                        <span class="game-revenue">$25,678</span>
+                                    </div>
+                                </div>
+                                <!-- More game items... -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Game Modal -->
+    <div class="modal game-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Game</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="gameForm">
+                    <div class="form-group">
+                        <label>Game Name</label>
+                        <input type="text" name="gameName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select name="category" required>
+                            <option value="slots">Slots</option>
+                            <option value="table">Table Games</option>
+                            <option value="live">Live Casino</option>
+                            <option value="poker">Poker</option>
+                            <option value="sports">Sports</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Game Image</label>
+                        <input type="file" name="gameImage" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="description" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>RTP (Return to Player)</label>
+                        <input type="number" name="rtp" min="1" max="100" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>Minimum Bet</label>
+                        <input type="number" name="minBet" min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Maximum Bet</label>
+                        <input type="number" name="maxBet" min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Features</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="features" value="multiplayer">
+                                Multiplayer
+                            </label>
+                            <label>
+                                <input type="checkbox" name="features" value="jackpot">
+                                Jackpot
+                            </label>
+                            <label>
+                                <input type="checkbox" name="features" value="bonus">
+                                Bonus Rounds
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select name="status">
+                            <option value="active">Active</option>
+                            <option value="maintenance">Maintenance</option>
+                            <option value="coming-soon">Coming Soon</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="save-game">Save Game</button>
+                        <button type="button" class="cancel-game">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/games.js"></script>
+</body>
+</html>

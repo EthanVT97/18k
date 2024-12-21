@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7Dragon Admin - Reports</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar (Same as dashboard.html) -->
+        <aside class="sidebar">
+            <!-- ... Sidebar content ... -->
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="date-range-picker">
+                    <i class="fas fa-calendar"></i>
+                    <select id="dateRange">
+                        <option value="today">Today</option>
+                        <option value="yesterday">Yesterday</option>
+                        <option value="week">Last 7 Days</option>
+                        <option value="month">Last 30 Days</option>
+                        <option value="custom">Custom Range</option>
+                    </select>
+                </div>
+                
+                <div class="top-bar-right">
+                    <button class="export-btn">
+                        <i class="fas fa-download"></i> Export Reports
+                    </button>
+                    <button class="schedule-btn">
+                        <i class="fas fa-clock"></i> Schedule Reports
+                    </button>
+                </div>
+            </header>
+
+            <!-- Reports Content -->
+            <div class="reports-content">
+                <!-- Report Navigation -->
+                <div class="report-nav">
+                    <button class="report-tab active" data-report="financial">Financial Reports</button>
+                    <button class="report-tab" data-report="user">User Analytics</button>
+                    <button class="report-tab" data-report="game">Game Performance</button>
+                    <button class="report-tab" data-report="promotion">Promotion Impact</button>
+                </div>
+
+                <!-- Financial Reports -->
+                <div class="report-section active" id="financial-reports">
+                    <div class="report-summary">
+                        <div class="summary-card">
+                            <h3>Gross Revenue</h3>
+                            <span class="amount">$125,678</span>
+                            <span class="change positive">+15.2%</span>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Net Profit</h3>
+                            <span class="amount">$45,890</span>
+                            <span class="change positive">+12.5%</span>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Total Bets</h3>
+                            <span class="amount">$789,012</span>
+                            <span class="change positive">+8.7%</span>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Payout Ratio</h3>
+                            <span class="amount">94.3%</span>
+                            <span class="change neutral">+0.2%</span>
+                        </div>
+                    </div>
+
+                    <div class="report-charts">
+                        <div class="chart-container">
+                            <h3>Revenue Trends</h3>
+                            <canvas id="revenueTrendChart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h3>Payment Methods</h3>
+                            <canvas id="paymentMethodsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="report-table">
+                        <h3>Financial Breakdown</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Deposits</th>
+                                    <th>Withdrawals</th>
+                                    <th>Bets</th>
+                                    <th>Wins</th>
+                                    <th>Net Revenue</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Table rows will be dynamically added -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- User Analytics -->
+                <div class="report-section" id="user-analytics">
+                    <div class="report-summary">
+                        <div class="summary-card">
+                            <h3>Active Users</h3>
+                            <span class="amount">1,234</span>
+                            <span class="change positive">+5.2%</span>
+                        </div>
+                        <div class="summary-card">
+                            <h3>New Users</h3>
+                            <span class="amount">156</span>
+                            <span class="change positive">+12.5%</span>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Avg. Session Time</h3>
+                            <span class="amount">45m</span>
+                            <span class="change positive">+3.7%</span>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Retention Rate</h3>
+                            <span class="amount">68%</span>
+                            <span class="change negative">-2.1%</span>
+                        </div>
+                    </div>
+
+                    <div class="report-charts">
+                        <div class="chart-container">
+                            <h3>User Activity</h3>
+                            <canvas id="userActivityChart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h3>User Demographics</h3>
+                            <canvas id="userDemographicsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="user-segments">
+                        <h3>User Segments</h3>
+                        <div class="segment-grid">
+                            <div class="segment-card">
+                                <h4>VIP Users</h4>
+                                <div class="segment-stats">
+                                    <div class="stat">
+                                        <label>Count</label>
+                                        <span>123</span>
+                                    </div>
+                                    <div class="stat">
+                                        <label>Revenue Share</label>
+                                        <span>45%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- More segment cards... -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Performance -->
+                <div class="report-section" id="game-performance">
+                    <div class="report-summary">
+                        <div class="summary-card">
+                            <h3>Total Games</h3>
+                            <span class="amount">245</span>
+                            <span class="change positive">+12</span>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Active Games</h3>
+                            <span class="amount">198</span>
+                            <span class="change neutral">0</span>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Avg. RTP</h3>
+                            <span class="amount">96.5%</span>
+                            <span class="change positive">+0.3%</span>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Total Bets</h3>
+                            <span class="amount">52,890</span>
+                            <span class="change positive">+8.7%</span>
+                        </div>
+                    </div>
+
+                    <div class="report-charts">
+                        <div class="chart-container">
+                            <h3>Game Popularity</h3>
+                            <canvas id="gamePopularityChart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h3>Game Revenue</h3>
+                            <canvas id="gameRevenueChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="game-rankings">
+                        <h3>Top Performing Games</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Game</th>
+                                    <th>Players</th>
+                                    <th>Bets</th>
+                                    <th>Revenue</th>
+                                    <th>RTP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Table rows will be dynamically added -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Promotion Impact -->
+                <div class="report-section" id="promotion-impact">
+                    <div class="report-summary">
+                        <div class="summary-card">
+                            <h3>Active Promotions</h3>
+                            <span class="amount">12</span>
+                            <span class="change positive">+2</span>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Total Claims</h3>
+                            <span class="amount">1,567</span>
+                            <span class="change positive">+12.5%</span>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Bonus Cost</h3>
+                            <span class="amount">$23,456</span>
+                            <span class="change negative">+15.2%</span>
+                        </div>
+                        <div class="summary-card">
+                            <h3>ROI</h3>
+                            <span class="amount">245%</span>
+                            <span class="change positive">+5.7%</span>
+                        </div>
+                    </div>
+
+                    <div class="report-charts">
+                        <div class="chart-container">
+                            <h3>Promotion Performance</h3>
+                            <canvas id="promotionPerformanceChart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h3>Conversion Rates</h3>
+                            <canvas id="conversionRatesChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="promotion-analysis">
+                        <h3>Promotion Analysis</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Promotion</th>
+                                    <th>Claims</th>
+                                    <th>Cost</th>
+                                    <th>Revenue</th>
+                                    <th>ROI</th>
+                                    <th>Conversion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Table rows will be dynamically added -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Schedule Report Modal -->
+    <div class="modal schedule-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Schedule Report</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="scheduleForm">
+                    <div class="form-group">
+                        <label>Report Type</label>
+                        <select name="reportType" required>
+                            <option value="financial">Financial Report</option>
+                            <option value="user">User Analytics</option>
+                            <option value="game">Game Performance</option>
+                            <option value="promotion">Promotion Impact</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Frequency</label>
+                        <select name="frequency" required>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Recipients</label>
+                        <input type="text" name="recipients" placeholder="Enter email addresses">
+                    </div>
+                    <div class="form-group">
+                        <label>Format</label>
+                        <select name="format" required>
+                            <option value="pdf">PDF</option>
+                            <option value="excel">Excel</option>
+                            <option value="csv">CSV</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit">Schedule Report</button>
+                        <button type="button" class="cancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/reports.js"></script>
+</body>
+</html>

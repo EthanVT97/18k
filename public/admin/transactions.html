@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7Dragon Admin - Transactions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin-style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar (Same as dashboard.html) -->
+        <aside class="sidebar">
+            <!-- ... Sidebar content ... -->
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search transactions...">
+                </div>
+                
+                <div class="top-bar-right">
+                    <button class="export-btn">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                    <button class="filter-btn">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
+                </div>
+            </header>
+
+            <!-- Transaction Summary -->
+            <div class="transaction-summary">
+                <div class="summary-card">
+                    <div class="card-icon deposits">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>Total Deposits</h3>
+                        <span class="amount">$125,678</span>
+                        <span class="change positive">+12.5%</span>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-icon withdrawals">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>Total Withdrawals</h3>
+                        <span class="amount">$89,432</span>
+                        <span class="change negative">-8.3%</span>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-icon revenue">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>Net Revenue</h3>
+                        <span class="amount">$36,246</span>
+                        <span class="change positive">+15.2%</span>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-icon pending">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>Pending Transactions</h3>
+                        <span class="amount">23</span>
+                        <span class="change neutral">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction List -->
+            <div class="transaction-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>User</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#TRX12345</td>
+                            <td>
+                                <div class="user-info">
+                                    <img src="https://via.placeholder.com/32" alt="User">
+                                    <span>John Doe</span>
+                                </div>
+                            </td>
+                            <td><span class="badge deposit">Deposit</span></td>
+                            <td class="amount">+$1,000.00</td>
+                            <td><span class="status-badge success">Completed</span></td>
+                            <td>2024-12-21 15:30</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="view-btn"><i class="fas fa-eye"></i></button>
+                                    <button class="approve-btn"><i class="fas fa-check"></i></button>
+                                    <button class="reject-btn"><i class="fas fa-times"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- More transaction rows... -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="prev-page"><i class="fas fa-chevron-left"></i></button>
+                <div class="page-numbers">
+                    <span class="current">1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>...</span>
+                    <span>10</span>
+                </div>
+                <button class="next-page"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Transaction Details Modal -->
+    <div class="modal transaction-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Transaction Details</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="transaction-details">
+                    <div class="detail-group">
+                        <label>Transaction ID:</label>
+                        <span>#TRX12345</span>
+                    </div>
+                    <div class="detail-group">
+                        <label>User:</label>
+                        <span>John Doe (#USER789)</span>
+                    </div>
+                    <div class="detail-group">
+                        <label>Type:</label>
+                        <span class="badge deposit">Deposit</span>
+                    </div>
+                    <div class="detail-group">
+                        <label>Amount:</label>
+                        <span class="amount">$1,000.00</span>
+                    </div>
+                    <div class="detail-group">
+                        <label>Status:</label>
+                        <span class="status-badge success">Completed</span>
+                    </div>
+                    <div class="detail-group">
+                        <label>Payment Method:</label>
+                        <span>Credit Card (**** 1234)</span>
+                    </div>
+                    <div class="detail-group">
+                        <label>Date:</label>
+                        <span>2024-12-21 15:30</span>
+                    </div>
+                    <div class="detail-group">
+                        <label>Description:</label>
+                        <span>Deposit via Credit Card</span>
+                    </div>
+                </div>
+                <div class="transaction-timeline">
+                    <h3>Transaction Timeline</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="time">15:30</div>
+                            <div class="event">Transaction Completed</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="time">15:29</div>
+                            <div class="event">Payment Processed</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="time">15:28</div>
+                            <div class="event">Payment Initiated</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="transaction-actions">
+                    <button class="approve-transaction">Approve Transaction</button>
+                    <button class="reject-transaction">Reject Transaction</button>
+                    <button class="download-receipt">Download Receipt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Modal -->
+    <div class="modal filter-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Filter Transactions</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="filterForm">
+                    <div class="form-group">
+                        <label>Date Range</label>
+                        <div class="date-range">
+                            <input type="date" name="startDate">
+                            <span>to</span>
+                            <input type="date" name="endDate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Transaction Type</label>
+                        <select name="type">
+                            <option value="all">All Types</option>
+                            <option value="deposit">Deposit</option>
+                            <option value="withdrawal">Withdrawal</option>
+                            <option value="bonus">Bonus</option>
+                            <option value="refund">Refund</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select name="status">
+                            <option value="all">All Status</option>
+                            <option value="completed">Completed</option>
+                            <option value="pending">Pending</option>
+                            <option value="failed">Failed</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Amount Range</label>
+                        <div class="amount-range">
+                            <input type="number" name="minAmount" placeholder="Min">
+                            <span>to</span>
+                            <input type="number" name="maxAmount" placeholder="Max">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit">Apply Filters</button>
+                        <button type="button" class="reset-filters">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/transactions.js"></script>
+</body>
+</html>

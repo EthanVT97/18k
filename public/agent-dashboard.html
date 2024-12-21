@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18KChat - Agent Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.10/dist/umd/i18next.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+</head>
+<body class="dashboard-body">
+    <header class="header dashboard-header">
+        <div class="header-left">
+            <h1>18KChat Agent Dashboard</h1>
+        </div>
+        <div class="header-right">
+            <select class="language-selector" id="languageSelector">
+                <option value="en">English</option>
+                <option value="my">Myanmar</option>
+                <option value="th">Thai</option>
+            </select>
+            <span class="agent-status" id="agentStatus">Online</span>
+            <button class="btn btn-gold" id="toggleStatus">Toggle Status</button>
+        </div>
+    </header>
+
+    <div class="dashboard">
+        <div class="sidebar">
+            <div class="chat-filters">
+                <button class="btn btn-primary active" data-filter="active">Active</button>
+                <button class="btn btn-gold" data-filter="pending">Pending</button>
+                <button class="btn btn-danger" data-filter="closed">Closed</button>
+            </div>
+            <div class="chat-list" id="chatList">
+                <!-- Chat list items will be dynamically added here -->
+            </div>
+        </div>
+
+        <div class="chat-workspace">
+            <div class="chat-header">
+                <div class="customer-info" id="customerInfo">
+                    <h3>Customer Information</h3>
+                    <p>ID: <span id="customerId">-</span></p>
+                    <p>Language: <span id="customerLanguage">-</span></p>
+                </div>
+                <div class="chat-actions">
+                    <button class="btn btn-danger" id="endChat">End Chat</button>
+                    <button class="btn btn-gold" id="transferChat">Transfer</button>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be dynamically added here -->
+            </div>
+
+            <div class="quick-responses" id="quickResponses">
+                <button class="btn btn-gold">Hello! How can I help you?</button>
+                <button class="btn btn-gold">I'll check that for you.</button>
+                <button class="btn btn-gold">Is there anything else I can help you with?</button>
+            </div>
+
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Type your message..." />
+                <button class="btn btn-primary" id="sendMessage">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/translations.js"></script>
+    <script src="js/agent-dashboard.js"></script>
+</body>
+</html>

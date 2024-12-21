@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18KChat Admin Dashboard</title>
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+</head>
+<body class="admin-body">
+    <!-- Navigation Sidebar -->
+    <nav class="admin-nav">
+        <div class="logo-container">
+            <img src="images/logo.png" alt="18KChat Logo" class="admin-logo">
+            <h1>18KChat</h1>
+        </div>
+        
+        <ul class="nav-menu">
+            <li><a href="#" data-page="dashboard" class="nav-link active"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
+            <li><a href="#" data-page="live-chat" class="nav-link"><i class="fas fa-comments"></i><span>Live Chat</span></a></li>
+            <li><a href="#" data-page="chat-history" class="nav-link"><i class="fas fa-history"></i><span>Chat History</span></a></li>
+            <li><a href="#" data-page="analytics" class="nav-link"><i class="fas fa-chart-bar"></i><span>Analytics</span></a></li>
+            <li><a href="#" data-page="settings" class="nav-link"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+            <li><a href="#" data-page="user-management" class="nav-link"><i class="fas fa-users"></i><span>User Management</span></a></li>
+            <li><a href="#" data-page="chatbot-settings" class="nav-link"><i class="fas fa-robot"></i><span>Chatbot Settings</span></a></li>
+            <li><a href="#" data-page="chat-templates" class="nav-link"><i class="fas fa-file-alt"></i><span>Chat Templates</span></a></li>
+            <li><a href="#" data-page="marketing" class="nav-link"><i class="fas fa-bullhorn"></i><span>Marketing</span></a></li>
+        </ul>
+
+        <div class="user-profile">
+            <img src="images/avatar.jpg" alt="Admin Avatar" class="user-avatar">
+            <div class="user-info">
+                <div class="user-name">Admin User</div>
+                <div class="user-role">Administrator</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="admin-main">
+        <!-- Pages Container -->
+        <div class="pages-container">
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page active">
+                <div class="page-header">
+                    <h1>Dashboard Overview</h1>
+                    <div class="dashboard-actions">
+                        <select class="filter-select">
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                        </select>
+                        <p class="last-updated">Last updated: <span id="lastUpdated">Just now</span></p>
+                    </div>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <!-- Stats Section -->
+                    <div class="stats-section">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <h3><i class="fas fa-comments"></i> Live Chats</h3>
+                                    <div class="stat-trend up">+15% Today</div>
+                                </div>
+                                <div class="stat-value" id="liveChats">247</div>
+                                <div class="stat-chart">
+                                    <canvas id="liveChatsChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <h3><i class="fas fa-clock"></i> Response Time</h3>
+                                    <div class="stat-trend down">-8% Today</div>
+                                </div>
+                                <div class="stat-value" id="responseTime">1.8m</div>
+                                <div class="stat-chart">
+                                    <canvas id="responseTimeChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <h3><i class="fas fa-users"></i> Total Users</h3>
+                                    <div class="stat-trend up">+25% Today</div>
+                                </div>
+                                <div class="stat-value" id="totalUsers">1,458</div>
+                                <div class="stat-chart">
+                                    <canvas id="totalUsersChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <h3><i class="fas fa-message"></i> Messages</h3>
+                                    <div class="stat-trend up">+32% Today</div>
+                                </div>
+                                <div class="stat-value" id="totalMessages">8,742</div>
+                                <div class="stat-chart">
+                                    <canvas id="messagesChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity Timeline -->
+                        <div class="activity-timeline">
+                            <div class="section-header">
+                                <h2>Recent Activity</h2>
+                            </div>
+                            <div class="timeline-items">
+                                <div class="timeline-item">
+                                    <div class="timeline-icon success">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h4>Chat Completed</h4>
+                                        <p>Support ticket #1234 resolved by John</p>
+                                        <span class="timeline-time">5 minutes ago</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-icon warning">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h4>New Chat Request</h4>
+                                        <p>Customer waiting for support</p>
+                                        <span class="timeline-time">10 minutes ago</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-icon info">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h4>New User Registered</h4>
+                                        <p>Sarah Johnson joined the platform</p>
+                                        <span class="timeline-time">25 minutes ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Chats Section -->
+                    <div class="active-chats-section">
+                        <div class="section-header">
+                            <h2>Active Chats</h2>
+                            <div class="section-actions">
+                                <button class="btn btn-primary">View All</button>
+                            </div>
+                        </div>
+                        <div class="active-chats-list">
+                            <div class="chat-preview-card">
+                                <img src="images/avatar1.jpg" alt="User Avatar" class="chat-avatar">
+                                <div class="chat-info">
+                                    <h4>Alice Cooper</h4>
+                                    <p>Product inquiry about iPhone 14...</p>
+                                    <div class="chat-meta">
+                                        <span class="chat-time">5m</span>
+                                        <span class="chat-status active">Active</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-preview-card">
+                                <img src="images/avatar2.jpg" alt="User Avatar" class="chat-avatar">
+                                <div class="chat-info">
+                                    <h4>Bob Wilson</h4>
+                                    <p>Need help with payment...</p>
+                                    <div class="chat-meta">
+                                        <span class="chat-time">12m</span>
+                                        <span class="chat-status pending">Pending</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-preview-card">
+                                <img src="images/avatar3.jpg" alt="User Avatar" class="chat-avatar">
+                                <div class="chat-info">
+                                    <h4>Carol Smith</h4>
+                                    <p>Shipping status update...</p>
+                                    <div class="chat-meta">
+                                        <span class="chat-time">18m</span>
+                                        <span class="chat-status active">Active</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="quick-stats">
+                            <div class="quick-stat-item">
+                                <h4>Average Response</h4>
+                                <div class="stat-value">1.8 minutes</div>
+                            </div>
+                            <div class="quick-stat-item">
+                                <h4>Customer Satisfaction</h4>
+                                <div class="stat-value">94%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Chat Page -->
+            <div id="live-chat" class="page">
+                <div class="page-header">
+                    <h1>Live Chat</h1>
+                    <div class="chat-filters">
+                        <select class="filter-select" id="chatStatus">
+                            <option value="all">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="pending">Pending</option>
+                            <option value="closed">Closed</option>
+                        </select>
+                        <button class="btn btn-primary">New Chat</button>
+                    </div>
+                </div>
+                <div class="chat-container">
+                    <div class="chats-list" id="chatsList">
+                        <!-- Chat list items will be populated here -->
+                    </div>
+                    <div class="chat-window">
+                        <div class="chat-header">
+                            <h3>Selected Chat</h3>
+                            <div class="chat-actions">
+                                <button class="btn btn-icon"><i class="fas fa-phone"></i></button>
+                                <button class="btn btn-icon"><i class="fas fa-video"></i></button>
+                                <button class="btn btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                        <div class="messages-container" id="messagesContainer">
+                            <!-- Messages will be populated here -->
+                        </div>
+                        <div class="chat-input">
+                            <textarea placeholder="Type your message..."></textarea>
+                            <div class="input-actions">
+                                <button class="btn btn-icon"><i class="fas fa-paperclip"></i></button>
+                                <button class="btn btn-icon"><i class="fas fa-smile"></i></button>
+                                <button class="btn btn-primary">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat History Page -->
+            <div id="chat-history" class="page">
+                <div class="page-header">
+                    <h1>Chat History</h1>
+                    <div class="history-filters">
+                        <input type="date" class="date-filter">
+                        <select class="filter-select">
+                            <option value="all">All Chats</option>
+                            <option value="completed">Completed</option>
+                            <option value="missed">Missed</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="history-list">
+                    <!-- History items will be populated here -->
+                </div>
+            </div>
+
+            <!-- Analytics Page -->
+            <div id="analytics" class="page">
+                <div class="page-header">
+                    <h1>Analytics</h1>
+                    <div class="analytics-filters">
+                        <select class="filter-select">
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="analytics-grid">
+                    <!-- Analytics content will be populated here -->
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="settings" class="page">
+                <div class="page-header">
+                    <h1>Settings</h1>
+                </div>
+                <div class="settings-grid">
+                    <!-- Settings content will be populated here -->
+                </div>
+            </div>
+
+            <!-- User Management Page -->
+            <div id="user-management" class="page">
+                <div class="page-header">
+                    <h1>User Management</h1>
+                    <div class="page-actions">
+                        <button class="btn btn-primary" id="addUserBtn">
+                            <i class="fas fa-plus"></i> Add New User
+                        </button>
+                    </div>
+                </div>
+
+                <div class="user-management-grid">
+                    <!-- User Filters -->
+                    <div class="filters-section">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search users...">
+                        </div>
+                        <div class="filter-group">
+                            <select class="filter-select">
+                                <option value="all">All Roles</option>
+                                <option value="admin">Administrators</option>
+                                <option value="agent">Support Agents</option>
+                                <option value="user">Regular Users</option>
+                            </select>
+                            <select class="filter-select">
+                                <option value="all">All Status</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="blocked">Blocked</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Users Table -->
+                    <div class="users-table-container">
+                        <table class="users-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Last Active</th>
+                                    <th>Chats</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="user-cell">
+                                            <img src="images/avatar1.jpg" alt="User">
+                                            <div>
+                                                <h4>John Smith</h4>
+                                                <span>john@example.com</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge admin">Administrator</span></td>
+                                    <td><span class="badge active">Active</span></td>
+                                    <td>2 minutes ago</td>
+                                    <td>145</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-icon" title="Block"><i class="fas fa-ban"></i></button>
+                                            <button class="btn btn-icon danger" title="Delete"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- More user rows... -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chatbot Settings Page -->
+            <div id="chatbot-settings" class="page">
+                <div class="page-header">
+                    <h1>Chatbot Settings</h1>
+                    <div class="page-actions">
+                        <button class="btn btn-primary" id="saveSettingsBtn">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </div>
+                </div>
+
+                <div class="settings-grid">
+                    <!-- Quick Responses -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <h2>Quick Responses</h2>
+                            <button class="btn btn-outline" id="addResponseBtn">
+                                <i class="fas fa-plus"></i> Add Response
+                            </button>
+                        </div>
+                        <div class="quick-responses-list">
+                            <div class="response-item">
+                                <div class="response-trigger">/greeting</div>
+                                <div class="response-content">
+                                    <p>Hello! How can I assist you today?</p>
+                                </div>
+                                <div class="response-actions">
+                                    <button class="btn btn-icon"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-icon danger"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="response-item">
+                                <div class="response-trigger">/help</div>
+                                <div class="response-content">
+                                    <p>Here are some common commands you can use...</p>
+                                </div>
+                                <div class="response-actions">
+                                    <button class="btn btn-icon"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-icon danger"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chatbot Behavior -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <h2>Chatbot Behavior</h2>
+                        </div>
+                        <div class="settings-form">
+                            <div class="form-group">
+                                <label>Initial Greeting</label>
+                                <textarea rows="3" placeholder="Enter initial greeting message...">Welcome to our support! How can I help you today?</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Response Delay (seconds)</label>
+                                <input type="number" value="1" min="0" max="5">
+                            </div>
+                            <div class="form-group">
+                                <label>Language</label>
+                                <select>
+                                    <option value="en">English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" checked>
+                                    Enable Auto-Response
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Settings -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <h2>AI Configuration</h2>
+                        </div>
+                        <div class="settings-form">
+                            <div class="form-group">
+                                <label>AI Model</label>
+                                <select>
+                                    <option value="gpt-3">GPT-3</option>
+                                    <option value="gpt-4">GPT-4</option>
+                                    <option value="custom">Custom Model</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Temperature</label>
+                                <input type="range" min="0" max="100" value="70">
+                                <div class="range-labels">
+                                    <span>More Focused</span>
+                                    <span>More Creative</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>API Key</label>
+                                <div class="api-key-input">
+                                    <input type="password" value="sk-...">
+                                    <button class="btn btn-icon"><i class="fas fa-eye"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Templates -->
+            <div id="chat-templates" class="page">
+                <div class="page-header">
+                    <h1>Chat Templates</h1>
+                    <div class="page-actions">
+                        <button class="btn btn-primary" id="addTemplateBtn">
+                            <i class="fas fa-plus"></i> New Template
+                        </button>
+                    </div>
+                </div>
+
+                <div class="templates-grid">
+                    <div class="template-card">
+                        <div class="template-header">
+                            <h3>Product Inquiry</h3>
+                            <div class="template-actions">
+                                <button class="btn btn-icon"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-icon"><i class="fas fa-copy"></i></button>
+                                <button class="btn btn-icon danger"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="template-content">
+                            <p>Thank you for your interest in [Product Name].</p>
+                            <p>Here are the key features:</p>
+                            <ul>
+                                <li>[Feature 1]</li>
+                                <li>[Feature 2]</li>
+                                <li>[Feature 3]</li>
+                            </ul>
+                            <p>Would you like me to provide more specific information?</p>
+                        </div>
+                        <div class="template-footer">
+                            <span class="template-category">Sales</span>
+                            <span class="template-usage">Used 145 times</span>
+                        </div>
+                    </div>
+
+                    <div class="template-card">
+                        <div class="template-header">
+                            <h3>Technical Support</h3>
+                            <div class="template-actions">
+                                <button class="btn btn-icon"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-icon"><i class="fas fa-copy"></i></button>
+                                <button class="btn btn-icon danger"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="template-content">
+                            <p>I understand you're experiencing an issue with [Problem Area].</p>
+                            <p>Let's try these steps:</p>
+                            <ol>
+                                <li>Clear your browser cache</li>
+                                <li>Restart the application</li>
+                                <li>Check your internet connection</li>
+                            </ol>
+                            <p>Please let me know if the issue persists.</p>
+                        </div>
+                        <div class="template-footer">
+                            <span class="template-category">Support</span>
+                            <span class="template-usage">Used 89 times</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marketing and Promotions Page -->
+            <div id="marketing" class="page">
+                <div class="page-header">
+                    <h1>Marketing & Promotions</h1>
+                    <div class="page-actions">
+                        <button class="btn btn-primary" id="addAnnouncementBtn">
+                            <i class="fas fa-plus"></i> New Announcement
+                        </button>
+                    </div>
+                </div>
+
+                <div class="marketing-grid">
+                    <!-- Hero Section Editor -->
+                    <div class="marketing-card">
+                        <div class="card-header">
+                            <h2>Hero Section</h2>
+                            <button class="btn btn-outline" id="saveHeroBtn">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                        <div class="settings-form">
+                            <div class="form-group">
+                                <label>Main Heading</label>
+                                <input type="text" value="Experience the Future of Chat" placeholder="Enter main heading">
+                            </div>
+                            <div class="form-group">
+                                <label>Subheading</label>
+                                <textarea rows="2" placeholder="Enter subheading">Engage with our AI-powered chatbot for instant, intelligent conversations.</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Hero Image</label>
+                                <div class="image-upload">
+                                    <input type="file" accept="image/*">
+                                    <div class="preview">
+                                        <img src="images/hero.jpg" alt="Hero Preview">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Call-to-Action</label>
+                                <input type="text" value="Start Chatting Now" placeholder="Button text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Announcements -->
+                    <div class="marketing-card">
+                        <div class="card-header">
+                            <h2>Active Announcements</h2>
+                        </div>
+                        <div class="announcements-list">
+                            <div class="announcement-item active">
+                                <div class="announcement-header">
+                                    <div class="announcement-badge">Featured</div>
+                                    <div class="announcement-actions">
+                                        <button class="btn btn-icon"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-icon danger"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                                <h3>Holiday Special Offer!</h3>
+                                <p>Get 30% off on all premium features this holiday season. Limited time offer!</p>
+                                <div class="announcement-meta">
+                                    <span><i class="fas fa-calendar"></i> Dec 20 - Jan 5</span>
+                                    <span><i class="fas fa-users"></i> Target: All Users</span>
+                                </div>
+                            </div>
+
+                            <div class="announcement-item">
+                                <div class="announcement-header">
+                                    <div class="announcement-badge">New Feature</div>
+                                    <div class="announcement-actions">
+                                        <button class="btn btn-icon"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-icon danger"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                                <h3>Introducing Voice Chat!</h3>
+                                <p>Now you can talk to our AI using voice commands. Try it out today!</p>
+                                <div class="announcement-meta">
+                                    <span><i class="fas fa-calendar"></i> Permanent</span>
+                                    <span><i class="fas fa-users"></i> Target: Premium Users</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features Section -->
+                    <div class="marketing-card">
+                        <div class="card-header">
+                            <h2>Features Highlight</h2>
+                            <button class="btn btn-outline" id="addFeatureBtn">
+                                <i class="fas fa-plus"></i> Add Feature
+                            </button>
+                        </div>
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <input type="text" value="AI-Powered Conversations" placeholder="Feature title">
+                                    <textarea placeholder="Feature description">Experience natural conversations with our advanced AI chatbot.</textarea>
+                                </div>
+                                <div class="feature-actions">
+                                    <button class="btn btn-icon"><i class="fas fa-arrows-alt"></i></button>
+                                    <button class="btn btn-icon danger"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <input type="text" value="Lightning Fast Responses" placeholder="Feature title">
+                                    <textarea placeholder="Feature description">Get instant responses to your questions, available 24/7.</textarea>
+                                </div>
+                                <div class="feature-actions">
+                                    <button class="btn btn-icon"><i class="fas fa-arrows-alt"></i></button>
+                                    <button class="btn btn-icon danger"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEO Settings -->
+                    <div class="marketing-card">
+                        <div class="card-header">
+                            <h2>SEO Settings</h2>
+                            <button class="btn btn-outline" id="saveSeoBtn">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                        <div class="settings-form">
+                            <div class="form-group">
+                                <label>Page Title</label>
+                                <input type="text" value="18KChat - AI-Powered Chat Platform" placeholder="Enter page title">
+                                <span class="char-count">60/60</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Meta Description</label>
+                                <textarea rows="3" placeholder="Enter meta description">Experience the next generation of chat with 18KChat. Our AI-powered platform provides intelligent conversations, 24/7 support, and seamless integration.</textarea>
+                                <span class="char-count">150/160</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Keywords</label>
+                                <input type="text" value="ai chat, chatbot, customer support, virtual assistant" placeholder="Enter keywords (comma-separated)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/admin-nav.js"></script>
+    <script src="js/admin-dashboard.js"></script>
+    <script src="js/admin-chat.js"></script>
+    <script src="js/marketing.js"></script>
+</body>
+</html>

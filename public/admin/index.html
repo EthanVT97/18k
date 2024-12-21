@@ -1,0 +1,335 @@
+chmod +x deploy/deploy.sh deploy/setup-ssh.sh<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18KChat Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/css/admin-dashboard.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h4>18KChat Admin</h4>
+                <div class="connection-status online" id="connection-status">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Connected</span>
+                </div>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-page="dashboard">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="users">
+                        <i class="bi bi-people"></i> Users
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="chat-rooms">
+                        <i class="bi bi-chat-dots"></i> Chat Rooms
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="messages">
+                        <i class="bi bi-envelope"></i> Messages
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/monitor" class="nav-link">
+                        <i class="bi bi-display"></i> System Monitor
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="top-bar">
+                <div class="search-container">
+                    <input type="text" id="global-search" placeholder="Search users, chats..." class="form-control">
+                </div>
+                <div class="user-menu">
+                    <span id="agent-name"></span>
+                    <div class="status-selector">
+                        <select id="agent-status" class="form-select">
+                            <option value="online">Online</option>
+                            <option value="busy">Busy</option>
+                            <option value="away">Away</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dashboard-page">
+                <h2 class="mb-4">Dashboard Overview</h2>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="value" id="total-users">-</div>
+                            <div class="label">Total Users</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="value" id="active-users">-</div>
+                            <div class="label">Active Users</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="value" id="total-messages">-</div>
+                            <div class="label">Messages Today</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="value" id="active-rooms">-</div>
+                            <div class="label">Active Rooms</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Recent Users</h5>
+                                <button class="btn btn-sm btn-outline-primary">View All</button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table" id="recent-users-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Username</th>
+                                                <th>Status</th>
+                                                <th>Joined</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td colspan="3" class="text-center">Loading...</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Active Chat Rooms</h5>
+                                <button class="btn btn-sm btn-outline-primary">View All</button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table" id="active-rooms-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Room Name</th>
+                                                <th>Users</th>
+                                                <th>Messages</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td colspan="3" class="text-center">Loading...</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="chat-rooms-page" style="display: none;">
+                <div class="chat-grid">
+                    <div class="active-chats">
+                        <h3>Active Chats</h3>
+                        <div id="active-chats-list" class="chat-list"></div>
+                    </div>
+                    <div class="chat-window">
+                        <div id="chat-messages" class="messages-container"></div>
+                        <div class="typing-indicator" id="typing-indicator" style="display: none;">
+                            <span>User is typing...</span>
+                        </div>
+                        <div class="input-area">
+                            <textarea id="message-input" class="form-control" placeholder="Type your message..."></textarea>
+                            <div class="quick-responses">
+                                <select id="quick-response-select" class="form-select">
+                                    <option value="">Quick Responses</option>
+                                </select>
+                            </div>
+                            <button id="send-message" class="btn btn-primary">Send</button>
+                        </div>
+                    </div>
+                    <div class="chat-info">
+                        <div id="current-chat-info"></div>
+                        <div class="chat-actions">
+                            <button id="end-chat" class="btn btn-danger">End Chat</button>
+                            <button id="transfer-chat" class="btn btn-secondary">Transfer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="monitor-page" style="display: none;">
+                <div class="dashboard-container">
+                    <header class="dashboard-header">
+                        <h1>18KChat Admin Dashboard</h1>
+                        <div class="system-status">
+                            <div class="status-item">
+                                <span>Connection:</span>
+                                <span id="connectionStatus" class="status-indicator">checking...</span>
+                            </div>
+                            <div class="status-item">
+                                <span>Database:</span>
+                                <span id="databaseStatus" class="status-indicator">checking...</span>
+                            </div>
+                            <div class="status-item">
+                                <span>Redis:</span>
+                                <span id="redisStatus" class="status-indicator">checking...</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div id="errorContainer" class="error-container" style="display: none;"></div>
+
+                    <main class="dashboard-content">
+                        <section class="stats-panel">
+                            <h2>Real-time Statistics</h2>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <h3>Active Users</h3>
+                                    <p id="activeUsers">0</p>
+                                </div>
+                                <div class="stat-card">
+                                    <h3>Total Chats</h3>
+                                    <p id="totalChats">0</p>
+                                </div>
+                                <div class="stat-card">
+                                    <h3>Active Agents</h3>
+                                    <p id="activeAgents">0</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="performance-panel">
+                            <h2>System Performance</h2>
+                            <div class="performance-grid">
+                                <div class="performance-card">
+                                    <h3>Memory Usage</h3>
+                                    <p id="memoryUsage">0MB</p>
+                                </div>
+                                <div class="performance-card">
+                                    <h3>Uptime</h3>
+                                    <p id="uptime">0m</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="controls-panel">
+                            <h2>Dashboard Controls</h2>
+                            <div class="controls-grid">
+                                <button id="refreshStats" class="control-button">Refresh Statistics</button>
+                                <button id="exportData" class="control-button">Export Data</button>
+                                <button id="systemSettings" class="control-button">System Settings</button>
+                            </div>
+                        </section>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4/dist/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        function updateStats() {
+            fetch('/api/admin/stats')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('total-users').textContent = data.totalUsers || '-';
+                    document.getElementById('active-users').textContent = data.activeUsers || '-';
+                    document.getElementById('total-messages').textContent = data.totalMessages || '-';
+                    document.getElementById('active-rooms').textContent = data.activeRooms || '-';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    ['total-users', 'active-users', 'total-messages', 'active-rooms'].forEach(id => {
+                        document.getElementById(id).textContent = '-';
+                    });
+                });
+
+            // Update recent users table
+            fetch('/api/admin/recent-users')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.querySelector('#recent-users-table tbody');
+                    if (data.users && data.users.length > 0) {
+                        tbody.innerHTML = data.users.map(user => `
+                            <tr>
+                                <td>${user.username}</td>
+                                <td><span class="status-badge ${user.online ? 'status-online' : 'status-offline'}">
+                                    ${user.online ? 'Online' : 'Offline'}
+                                </span></td>
+                                <td>${new Date(user.joined).toLocaleDateString()}</td>
+                            </tr>
+                        `).join('');
+                    } else {
+                        tbody.innerHTML = '<tr><td colspan="3" class="text-center">No users found</td></tr>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.querySelector('#recent-users-table tbody').innerHTML = 
+                        '<tr><td colspan="3" class="text-center">Error loading users</td></tr>';
+                });
+
+            // Update active rooms table
+            fetch('/api/admin/active-rooms')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.querySelector('#active-rooms-table tbody');
+                    if (data.rooms && data.rooms.length > 0) {
+                        tbody.innerHTML = data.rooms.map(room => `
+                            <tr>
+                                <td>${room.name}</td>
+                                <td>${room.users}</td>
+                                <td>${room.messages}</td>
+                            </tr>
+                        `).join('');
+                    } else {
+                        tbody.innerHTML = '<tr><td colspan="3" class="text-center">No active rooms</td></tr>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.querySelector('#active-rooms-table tbody').innerHTML = 
+                        '<tr><td colspan="3" class="text-center">Error loading rooms</td></tr>';
+                });
+        }
+
+        // Update stats every 30 seconds
+        updateStats();
+        setInterval(updateStats, 30000);
+
+        // Handle navigation
+        document.querySelectorAll('.nav-link[data-page]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                const pageId = link.getAttribute('data-page');
+                document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
+                document.getElementById(`${pageId}-page`).style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

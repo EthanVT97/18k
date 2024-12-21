@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18KChat - Customer Support</title>
+    <link rel="stylesheet" href="css/chat-widget.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <!-- Chat Widget Button -->
+    <button id="chatWidgetButton" class="chat-widget-button animate__animated animate__fadeIn">
+        <i class="fas fa-comments"></i>
+        <span class="notification-badge hidden">0</span>
+    </button>
+
+    <!-- Chat Window -->
+    <div id="chatWindow" class="chat-window hidden animate__animated">
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <img src="assets/logo.svg" alt="18KChat Logo" class="chat-logo">
+                <div class="chat-status">
+                    <h3>Customer Support</h3>
+                    <span class="status-indicator">
+                        <i class="fas fa-circle"></i> Online
+                    </span>
+                </div>
+            </div>
+            <div class="chat-actions">
+                <button class="minimize-btn">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chat-messages">
+            <div class="welcome-message">
+                <h4>Welcome to 18KChat Support! 👋</h4>
+                <p>How can we help you today?</p>
+            </div>
+            <!-- Messages will be dynamically added here -->
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <button class="quick-action-btn" data-query="product">
+                <i class="fas fa-box"></i> Product Info
+            </button>
+            <button class="quick-action-btn" data-query="shipping">
+                <i class="fas fa-shipping-fast"></i> Shipping
+            </button>
+            <button class="quick-action-btn" data-query="returns">
+                <i class="fas fa-undo"></i> Returns
+            </button>
+            <button class="quick-action-btn" data-query="payment">
+                <i class="fas fa-credit-card"></i> Payment
+            </button>
+        </div>
+
+        <!-- Typing Indicator -->
+        <div class="typing-indicator hidden">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <!-- Chat Input -->
+        <div class="chat-input">
+            <div class="input-actions">
+                <button class="attach-btn">
+                    <i class="fas fa-paperclip"></i>
+                    <input type="file" id="fileInput" hidden>
+                </button>
+                <button class="emoji-btn">
+                    <i class="fas fa-smile"></i>
+                </button>
+            </div>
+            <textarea 
+                id="messageInput" 
+                placeholder="Type your message..."
+                rows="1"
+                data-min-rows="1"
+                data-max-rows="5"
+            ></textarea>
+            <button class="send-btn" disabled>
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/chat-widget.js"></script>
+</body>
+</html>

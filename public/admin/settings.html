@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7Dragon Admin - Settings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin-style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar (Same as dashboard.html) -->
+        <aside class="sidebar">
+            <!-- ... Sidebar content ... -->
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <h1>System Settings</h1>
+                
+                <div class="top-bar-right">
+                    <button class="save-all-btn">
+                        <i class="fas fa-save"></i> Save All Changes
+                    </button>
+                </div>
+            </header>
+
+            <!-- Settings Content -->
+            <div class="settings-content">
+                <!-- Settings Navigation -->
+                <div class="settings-nav">
+                    <button class="settings-tab active" data-settings="general">
+                        <i class="fas fa-cog"></i> General
+                    </button>
+                    <button class="settings-tab" data-settings="security">
+                        <i class="fas fa-shield-alt"></i> Security
+                    </button>
+                    <button class="settings-tab" data-settings="payments">
+                        <i class="fas fa-credit-card"></i> Payments
+                    </button>
+                    <button class="settings-tab" data-settings="notifications">
+                        <i class="fas fa-bell"></i> Notifications
+                    </button>
+                    <button class="settings-tab" data-settings="integrations">
+                        <i class="fas fa-plug"></i> Integrations
+                    </button>
+                    <button class="settings-tab" data-settings="maintenance">
+                        <i class="fas fa-tools"></i> Maintenance
+                    </button>
+                </div>
+
+                <!-- General Settings -->
+                <div class="settings-section active" id="general-settings">
+                    <h2>General Settings</h2>
+                    <form id="generalSettingsForm">
+                        <div class="settings-group">
+                            <h3>Site Information</h3>
+                            <div class="form-group">
+                                <label>Site Name</label>
+                                <input type="text" name="siteName" value="7Dragon Casino">
+                            </div>
+                            <div class="form-group">
+                                <label>Site Description</label>
+                                <textarea name="siteDescription" rows="3">The best online casino experience</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Support Email</label>
+                                <input type="email" name="supportEmail" value="support@7dragon.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Phone</label>
+                                <input type="tel" name="contactPhone" value="+1 234 567 8900">
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>Regional Settings</h3>
+                            <div class="form-group">
+                                <label>Default Language</label>
+                                <select name="defaultLanguage">
+                                    <option value="en">English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                    <option value="de">German</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Default Currency</label>
+                                <select name="defaultCurrency">
+                                    <option value="USD">USD ($)</option>
+                                    <option value="EUR">EUR (€)</option>
+                                    <option value="GBP">GBP (£)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Timezone</label>
+                                <select name="timezone">
+                                    <option value="UTC">UTC</option>
+                                    <option value="EST">EST</option>
+                                    <option value="PST">PST</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>Social Media</h3>
+                            <div class="form-group">
+                                <label>Facebook URL</label>
+                                <input type="url" name="facebookUrl">
+                            </div>
+                            <div class="form-group">
+                                <label>Twitter URL</label>
+                                <input type="url" name="twitterUrl">
+                            </div>
+                            <div class="form-group">
+                                <label>Instagram URL</label>
+                                <input type="url" name="instagramUrl">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="settings-section" id="security-settings">
+                    <h2>Security Settings</h2>
+                    <form id="securitySettingsForm">
+                        <div class="settings-group">
+                            <h3>Authentication</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="twoFactorAuth">
+                                    Enable Two-Factor Authentication
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Session Timeout (minutes)</label>
+                                <input type="number" name="sessionTimeout" value="30">
+                            </div>
+                            <div class="form-group">
+                                <label>Maximum Login Attempts</label>
+                                <input type="number" name="maxLoginAttempts" value="5">
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>Password Policy</h3>
+                            <div class="form-group">
+                                <label>Minimum Password Length</label>
+                                <input type="number" name="minPasswordLength" value="8">
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="requireSpecialChar" checked>
+                                    Require Special Characters
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="requireNumbers" checked>
+                                    Require Numbers
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Password Expiry (days)</label>
+                                <input type="number" name="passwordExpiry" value="90">
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>IP Security</h3>
+                            <div class="form-group">
+                                <label>Allowed IP Addresses</label>
+                                <textarea name="allowedIPs" rows="3" placeholder="Enter IP addresses, one per line"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="blockVPN" checked>
+                                    Block VPN/Proxy Connections
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Payment Settings -->
+                <div class="settings-section" id="payment-settings">
+                    <h2>Payment Settings</h2>
+                    <form id="paymentSettingsForm">
+                        <div class="settings-group">
+                            <h3>Payment Methods</h3>
+                            <div class="payment-methods">
+                                <div class="payment-method">
+                                    <div class="method-header">
+                                        <img src="https://via.placeholder.com/40" alt="Credit Card">
+                                        <span>Credit Card</span>
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="method-settings">
+                                        <div class="form-group">
+                                            <label>API Key</label>
+                                            <input type="password" name="ccApiKey">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Transaction Fee (%)</label>
+                                            <input type="number" name="ccFee" value="2.5" step="0.1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- More payment methods... -->
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>Withdrawal Limits</h3>
+                            <div class="form-group">
+                                <label>Minimum Withdrawal</label>
+                                <input type="number" name="minWithdrawal" value="10">
+                            </div>
+                            <div class="form-group">
+                                <label>Maximum Withdrawal</label>
+                                <input type="number" name="maxWithdrawal" value="10000">
+                            </div>
+                            <div class="form-group">
+                                <label>Daily Withdrawal Limit</label>
+                                <input type="number" name="dailyWithdrawalLimit" value="50000">
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>KYC Requirements</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="requireKYC" checked>
+                                    Require KYC for Withdrawals
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>KYC Threshold Amount</label>
+                                <input type="number" name="kycThreshold" value="2000">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Notification Settings -->
+                <div class="settings-section" id="notification-settings">
+                    <h2>Notification Settings</h2>
+                    <form id="notificationSettingsForm">
+                        <div class="settings-group">
+                            <h3>Email Notifications</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="newUserNotification" checked>
+                                    New User Registration
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="withdrawalNotification" checked>
+                                    Withdrawal Requests
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="largeDepositNotification" checked>
+                                    Large Deposits
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Large Deposit Threshold</label>
+                                <input type="number" name="largeDepositThreshold" value="10000">
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>System Alerts</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="systemErrorAlerts" checked>
+                                    System Error Alerts
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="securityAlerts" checked>
+                                    Security Alerts
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="maintenanceAlerts" checked>
+                                    Maintenance Alerts
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>Alert Recipients</h3>
+                            <div class="form-group">
+                                <label>Primary Email</label>
+                                <input type="email" name="primaryEmail" value="admin@7dragon.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Secondary Email</label>
+                                <input type="email" name="secondaryEmail">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Integration Settings -->
+                <div class="settings-section" id="integration-settings">
+                    <h2>Integration Settings</h2>
+                    <form id="integrationSettingsForm">
+                        <div class="settings-group">
+                            <h3>Game Providers</h3>
+                            <div class="integration-list">
+                                <div class="integration-item">
+                                    <div class="integration-header">
+                                        <img src="https://via.placeholder.com/40" alt="Provider 1">
+                                        <span>Provider 1</span>
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="integration-settings">
+                                        <div class="form-group">
+                                            <label>API Key</label>
+                                            <input type="password" name="provider1ApiKey">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>API Secret</label>
+                                            <input type="password" name="provider1ApiSecret">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- More providers... -->
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>Analytics Integration</h3>
+                            <div class="form-group">
+                                <label>Google Analytics ID</label>
+                                <input type="text" name="googleAnalyticsId">
+                            </div>
+                            <div class="form-group">
+                                <label>Facebook Pixel ID</label>
+                                <input type="text" name="facebookPixelId">
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>Chat Integration</h3>
+                            <div class="form-group">
+                                <label>Live Chat Provider</label>
+                                <select name="liveChatProvider">
+                                    <option value="intercom">Intercom</option>
+                                    <option value="zendesk">Zendesk</option>
+                                    <option value="crisp">Crisp</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Chat Widget ID</label>
+                                <input type="text" name="chatWidgetId">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Maintenance Settings -->
+                <div class="settings-section" id="maintenance-settings">
+                    <h2>Maintenance Settings</h2>
+                    <form id="maintenanceSettingsForm">
+                        <div class="settings-group">
+                            <h3>Maintenance Mode</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="maintenanceMode">
+                                    Enable Maintenance Mode
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Maintenance Message</label>
+                                <textarea name="maintenanceMessage" rows="3">We are currently performing scheduled maintenance. Please check back later.</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Allowed IPs During Maintenance</label>
+                                <textarea name="maintenanceAllowedIPs" rows="3" placeholder="Enter IP addresses, one per line"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>Backup Settings</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="autoBackup" checked>
+                                    Enable Automatic Backups
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Backup Frequency</label>
+                                <select name="backupFrequency">
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="monthly">Monthly</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Backup Retention (days)</label>
+                                <input type="number" name="backupRetention" value="30">
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>System Cleanup</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="autoCleanup" checked>
+                                    Enable Automatic Cleanup
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Clean Log Files Older Than (days)</label>
+                                <input type="number" name="logRetention" value="90">
+                            </div>
+                            <div class="form-group">
+                                <label>Clean Temporary Files Older Than (days)</label>
+                                <input type="number" name="tempFileRetention" value="7">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+# Enable URL rewriting
+RewriteEngine On
+RewriteBase /18KChat/public/
+
+# Enable rewrite logging
+RewriteLog "C:/xampp/apache/logs/rewrite.log"
+RewriteLogLevel 9
+
+# Prevent directory listing
+Options -Indexes
+
+# Redirect all requests to index.php if the file/directory doesn't exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# Cache control
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# Compress text files
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
+</IfModule>
+
+# Debug information
+SetEnvIf Request_URI .* DEBUG_URI=$0
+Header set X-Debug-URI "%{DEBUG_URI}e" env=DEBUG_URI
